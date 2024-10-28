@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Bot Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            padding: 20px; /* Thêm padding cho body để có khoảng trống */
+            animation: fadeInPage 1s ease-in-out;
+            box-sizing: border-box;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+        h2, h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem; /* Điều chỉnh kích thước chữ */
+        }
+        .status-container {
+            display: none;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+            transform: translateY(10px);
+        }
+        .status-container.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .progress-container {
+            background-color: #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 20px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            transition: width 1s ease, background-color 0.3s ease;
+        }
+        .btn {
+            width: 100%;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 5px; /* Thêm khoảng cách giữa các nút */
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 0.9em;
+            text-align: center;
+            color: #666;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .loading {
+            animation: spin 1s linear infinite;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Trading Bot Control</h2>
+        <label>API Key:</label>
+        <input type="text" id="api_key" class="form-control mb-3" placeholder="API Key">
+        <label>Secret Key:</label>
+        <input type="text" id="secret_key" class="form-control mb-3" placeholder="Secret Key">
+        <button onclick="setAPI()" class="btn btn-primary">Set API</button>
+        <button onclick="startBot()" class="btn btn-success">Start</button>
+        <button onclick="stopBot()" class="btn btn-danger">Stop</button>
+        <p id="status" class="text-center mt-3"></p>
+
+        <!-- Thông tin trạng thái của bot -->
+        <div class="status-container mt-4" id="status-container">
+            <h1>Namtrader BTCUSDT.P Status</h1>
+            <p>💵 Giá trị tài khoản hiện tại: <span id="current_balance"></span></p>
+            <p>📈 Entry Price: <span id="entry_price"></span></p>
+            <p>💰 Mark Price: <span id="mark_price"></span></p>
+            <p>📉 Vị thế hiện tại: <span id="position_type"></span></p>
+            <p class="pnl">PNL hiện tại: 
+                <span class="progress-container">
+                    <span id="pnl_display" class="progress-bar"></span>
+                </span>
+            </p>
+            <p>Trạng thái lệnh cuối cùng: <span id="last_order_status"></span></p>
+            <p>🕒 Thời gian hiện tại (UTC+7): <span id="current_time"></span></p>
+            <div class="loading" id="loading" style="display: none;"></div>
+        </div>
+
+        <!-- Thông báo lỗi -->
+        <div id="error-message" class="error-message"></div>
+        <div id="error-ip" class="error-message"></div>
+
+        <div class="footer">
+            &copy; 2024 NamTrading Bot
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functions here
+    </script>
+</body>
+</html>
